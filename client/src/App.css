@@ -1,0 +1,24 @@
+.add_btn{
+  text-align: right ;
+}
+.container
+{
+  overflow: auto;
+}
+.left_view h3{
+   font-size: 21px;
+} 
+.left_view span{
+  font-weight: 400;
+}
+.left_view p{
+  font-weight: 600;
+}
+
+.right_view p{
+  font-weight: 600;
+}
+
+.right_view span{
+  font-weight: 400 ;
+}
