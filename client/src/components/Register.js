@@ -27,7 +27,7 @@ function Register() {
   const addinpdata = async (e) => {
     e.preventDefault();
     const { name, email, age, mobile, work, add, desc } = inpval;
-    const res = await fetch("/register", {
+    const res = await fetch("https://crud-app-ygjt.onrender.com/register", {
       method: "POST",
       headers: {
         "content-Type": "application/json",

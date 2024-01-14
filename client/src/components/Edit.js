@@ -28,12 +28,15 @@ function Edit() {
   console.log(id);
 
   const getdata = async (e) => {
-    const res = await fetch(`/getuser/${id}`, {
-      method: "GET",
-      headers: {
-        "content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      `https://crud-app-ygjt.onrender.com/getuser/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
     const data = await res.json();
     console.log(data);
     if (res.status === 422 || !data) {
@@ -51,13 +54,16 @@ function Edit() {
     e.preventDefault();
     const { name, email, age, mobile, work, add, desc } = inpval;
     console.log(inpval);
-    const res2 = await fetch(`/updateuser/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, email, age, mobile, work, add, desc }),
-    });
+    const res2 = await fetch(
+      `https://crud-app-ygjt.onrender.com/updateuser/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, age, mobile, work, add, desc }),
+      }
+    );
 
     const data2 = await res2.json();
     console.log(data2);

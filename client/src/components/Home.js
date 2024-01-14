@@ -8,7 +8,7 @@ function Home() {
   const [getuserdata, setUserdata] = useState([]);
   console.log(getuserdata);
   const getdata = async (e) => {
-    const res = await fetch("/getdata", {
+    const res = await fetch("https://crud-app-ygjt.onrender.com/getdata", {
       method: "GET",
       headers: {
         "content-Type": "application/json",
@@ -29,12 +29,15 @@ function Home() {
   }, []);
 
   const deleteuser = async (id) => {
-    const res2 = await fetch(`/deleteuser/${id}`, {
-      method: "DELETE",
-      headers: {
-        "content-Type": "application/json",
-      },
-    });
+    const res2 = await fetch(
+      `https://crud-app-ygjt.onrender.com/deleteuser/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
     const deletedata = await res2.json();
     console.log(deletedata);
     if (res2.status === 422 || !deletedata) {

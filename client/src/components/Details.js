@@ -17,12 +17,15 @@ function Details() {
   const [getuserdata, setUserdata] = useState([]);
 
   const getdata = async (e) => {
-    const res = await fetch(`/getuser/${id}`, {
-      method: "GET",
-      headers: {
-        "content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      `https://crud-app-ygjt.onrender.com/getuser/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
     const data = await res.json();
     console.log(data);
     if (res.status === 422 || !data) {
@@ -38,12 +41,15 @@ function Details() {
   }, []);
 
   const deleteuser = async (id) => {
-    const res2 = await fetch(`/deleteuser/${id}`, {
-      method: "DELETE",
-      headers: {
-        "content-Type": "application/json",
-      },
-    });
+    const res2 = await fetch(
+      `https://crud-app-ygjt.onrender.com/deleteuser/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
     const deletedata = await res2.json();
     console.log(deletedata);
     if (res2.status === 422 || !deletedata) {
