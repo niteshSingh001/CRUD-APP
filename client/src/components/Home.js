@@ -7,20 +7,30 @@ import { Link } from "react-router-dom";
 function Home() {
   const [getuserdata, setUserdata] = useState([]);
   console.log(getuserdata);
+  const [loading, setLoading] = useState(true);
   const getdata = async (e) => {
-    const res = await fetch("https://crud-app-ygjt.onrender.com/getdata", {
-      method: "GET",
-      headers: {
-        "content-Type": "application/json",
-      },
-    });
-    const data = await res.json();
-    console.log(data);
-    if (res.status === 422 || !data) {
-      console.log("error");
-    } else {
-      setUserdata(data);
-      console.log("Get Data");
+    try {
+      const res = await fetch("https://crud-app-ygjt.onrender.com/getdata", {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      });
+      if (!res.ok) {
+        throw new Error("Error fetching data");
+      }
+      const data = await res.json();
+      console.log(data);
+      if (res.status === 422 || !data) {
+        console.log("error");
+      } else {
+        setUserdata(data);
+        setLoading(false);
+        console.log("Get Data");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setLoading(false);
     }
   };
 
@@ -57,20 +67,24 @@ function Home() {
               Add Data
             </Link>
           </div>
-          <table className="table">
-            <thead>
-              <tr className="table-dark">
-                <th scope="col">ID</th>
-                <th scope="col">Username</th>
-                <th scope="col">Email</th>
-                <th scope="col">Job</th>
-                <th scope="col">Number</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {getuserdata.map((element, id) => {
-                return (
+          {loading ? (
+            <h3 style={{ textAlign: "center", marginTop: "20px" }}>
+              Loading...
+            </h3>
+          ) : (
+            <table className="table">
+              <thead>
+                <tr className="table-dark">
+                  <th scope="col">ID</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Job</th>
+                  <th scope="col">Number</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {getuserdata.map((element, id) => (
                   <tr key={id + 1}>
                     <th scope="row">{id + 1}</th>
                     <td>{element.name}</td>
@@ -96,10 +110,10 @@ function Home() {
                       </button>
                     </td>
                   </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </>
